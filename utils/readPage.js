@@ -19,13 +19,13 @@ let mainSpider={
   dailyWork:false,
   article:[],
   fetchNewsItemURL:async function(page=1,isDalyWork=false){
-    console.log('page',page)
     const self=this;
     //取列表时，timestamp是不会变的，这里只取一次就可以对比
     let timestamp = await Timestamp.find({}).sort({"flag":-1});
     latestTimestamp = timestamp[0]?timestamp[0].timestamp:0;
     earlyTimestamp = timestamp[1]?timestamp[1].timestamp:9999999999;
     self.dailyWork=isDalyWork;
+    console.log('page',page)
     superagent.get(`${config.baseTarget}page/${page}/`).end(async (err,res)=>{
       if(err){
         console.log("error:",err);

@@ -17,7 +17,9 @@
     "mongoose": "^5.5.4",
     "morgan": "~1.9.0",
     "serve-favicon": "~2.4.5",
-    "superagent": "^5.0.4"
+    "sha1": "^1.1.1",
+    "superagent": "^5.0.4",
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
     "babel": "^6.23.0",
