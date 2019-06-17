@@ -1,5 +1,6 @@
 require('babel-register');
 let conf={
+  service:'https://f0c02c8e.ngrok.io/',
   baseTarget:'https://www.newsinlevels.com/',
   mongodb:'mongodb://localhost:27017/engInLevels',
   wechat:{

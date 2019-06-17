@@ -99,8 +99,9 @@ ep.tail('pageList',async function(pageList){
       time = _time[0].split("-").reverse().join("-");
       time = new Date(time).getTime()/1000;
 
-      title = wrap.find(".article-title").text();
-      level[mod] = wrap.find("#nContent").html()
+      title = wrap.find(".article-title").text().trim();
+      let new_con= wrap.find("#nContent").html().replace(/<p>You can watch the video news lower on this page.<\/p>/,"").replace(/<p>You can watch the original video in the Level 3 section.<\/p>/,"")
+      level[mod] = new_con.trim();
       img = wrap.find(".img-wrap a").attr("href");
 
       if(mod==2){

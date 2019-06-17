@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    等级英语 -
+    <%= title %>
+  </title>
+  <% include commentCss %>
+</head>
+
+<body>
+  <div class='main'>
+    <article class="weui-article">
+      <h2 class="title"><%= title %></h2>
+      <p><img src="<%= img %> " /></p>
+      <section>
+        <%- level1 %>
+      </section>
+  </div>
+  <div class="contentmenu_translate">
+    <a href="javascript:;" class="weui-btn weui-btn_plain-primary">翻译</a>
+    <a href="javascript:;" class="weui-btn weui-btn_plain-default">取消</a>
+  </div>
+  <% include commentJs %>
+    <script>
+      window.addEventListener('contextmenu', function(e) {
+        $(".contentmenu_translate").show();
+        return false;
+      });
+    </script>
+</body>
+
 </html>
