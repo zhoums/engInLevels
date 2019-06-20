@@ -7,10 +7,11 @@ const config = require('../config')
 let User = require('../models/User')
 let formatJson = require('./formatJson')
 let Articles = require('../models/Article')
-var utils={};
 var sha1=require('sha1')
 
 let wechat= new WeChat(config)
+
+var utils={};
 
 //微信客户端各类回调用接口
 var EventFunction = {
@@ -113,7 +114,7 @@ utils.auth = function (config){
             }
             if(body.Event[0]=="CLICK"){
               if(/^V1001/.test(body.EventKey[0])){
-                let lim = body.EventKey[0]=="V1001_THR_NEWS"?3:8;
+                let lim = body.EventKey[0]=="V1001_THE_NEWS"?3:8;
                 Articles.find({}).sort({time:-1}).limit(lim).exec(async (error,articles)=>{
                   if(error){
                     console.log("error:",error)
@@ -129,7 +130,9 @@ utils.auth = function (config){
                     '<Articles>';
 
                   articles.forEach((item,key)=>{
-                      title = (item.title.trim()).split("–")[0];
+                      title = (item.title.trim()).split("–");
+                      title.pop();
+                      title = title.length>1?title.join(" - "):title;
                       img = item.img.trim();
                       if(key>0){
                         let pop = img.split(".").pop()
@@ -168,5 +171,6 @@ utils.replaceHTML = function(str){
 }
 
 utils.formatJson = formatJson;
+
 
 module.exports = utils;

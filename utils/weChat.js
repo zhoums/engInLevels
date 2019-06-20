@@ -67,7 +67,7 @@ WeChat.prototype.uploadTempMaterial = async function(type,filepath){
   var form = { //构造表单
     media:fs.createReadStream(filepath)
   }
-  console.log(form,'=============')
+
   let a_token= await this.getAccessToken();
   return new Promise(function(resolve,reject){
     var url = self.baseAPI+'media/upload?access_token=' + a_token + '&type=' + type;

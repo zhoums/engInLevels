@@ -6,6 +6,7 @@ let formatJson = require('../utils/formatJson');
 let Article = require('../models/Article');
 var config = require("../config");
 let weChat = require("../utils/weChat");
+let youdao = require("../utils/youdao");
 var utils = require('../utils/util')
 
 let ep= new eventproxy();
@@ -58,7 +59,7 @@ let router = app=>{
   app.get('/articles/:page', function(req, res, next) {
     var page=req.params.page-1;
     page=page<0?0:page
-    Article.find().sort({"time":-1}).limit(12).skip(page*12).exec((err,article)=>{
+    Article.find().sort({"time":-1}).limit(12).skip(page*8).exec((err,article)=>{
       if(err){
         res.json(formatJson(err));
         return;
@@ -85,6 +86,11 @@ let router = app=>{
   })
   app.get('/tenArticles',(req,res,next)=>{
 
+  })
+  app.post('/translate',async function(req,res,next){
+    let word= req.body.q;
+    let translation=await youdao.transtration(word);
+    res.json(translation)
   })
 }
 

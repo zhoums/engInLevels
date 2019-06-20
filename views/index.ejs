@@ -9,28 +9,96 @@
     <%= title %>
   </title>
   <% include commentCss %>
+    <% include commentJs %>
 </head>
 
 <body>
   <div class='main'>
     <article class="weui-article">
       <h2 class="title"><%= title %></h2>
-      <p><img src="<%= img %> " /></p>
-      <section>
-        <%- level1 %>
+      <div class="imgwrap"><img src="<%= img %> " /></div>
+      <div class="handleLevel">
+        <a class="btn-level active" href="javascript:;" id="level1">Level1</a>
+        <a class="btn-level" href="javascript:;" id="level2">Level2</a>
+        <a class="btn-level" href="javascript:;" id="level3">Level3</a>
+      </div>
+      <section class="handleContent">
+        <div class="content-level1">
+          <%- level1 %>
+        </div>
+        <div class="content-level2">
+          <%- level2 %>
+        </div>
+        <div class="content-level3">
+          <%- level3 %>
+        </div>
       </section>
+    </article>
+    <% include addword %>
   </div>
   <div class="contentmenu_translate">
-    <a href="javascript:;" class="weui-btn weui-btn_plain-primary">翻译</a>
-    <a href="javascript:;" class="weui-btn weui-btn_plain-default">取消</a>
+    <a href="javascript:;" id="translate" class="weui-btn weui-btn_mini weui-btn_plain-primary">在线翻译</a>
   </div>
-  <% include commentJs %>
-    <script>
-      window.addEventListener('contextmenu', function(e) {
-        $(".contentmenu_translate").show();
-        return false;
-      });
-    </script>
+  <div id="loadingToast" style="display:none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+      <i class="weui-loading weui-icon_toast"></i>
+      <p class="weui-toast__content">Loading</p>
+    </div>
+  </div>
+  <script>
+    // window.addEventListener('contextmenu', function(e) { // alert($(e.target).text()) // $(".contentmenu_translate").show(); // return false; // });
+
+    $(".btn-level").on("click", function() {
+      if ($(this).hasClass("active")) {
+        return
+      }
+      let id = $(this).attr("id");
+      $(this).siblings().removeClass("active");
+      $(this).addClass("active");
+      $(".handleContent").find("div").hide();
+      $(".content-" + id).show()
+    })
+    $(".handleContent strong").on("click", function() {
+      $("#loadingToast").show();
+      let word = $(this).text();
+      $.ajax({
+        url: '/translate',
+        method: 'post',
+        data: {
+          q: word
+        },
+        success(res) {
+          $("#loadingToast").hide();
+          $("#con-translations").html(templateTran(res));
+          $("#dialog-addwords").show();
+        },
+        error(err) {
+          $("#loadingToast").hide();
+          console.log(err)
+        }
+      })
+
+    })
+
+    function templateTran(obj) {
+      let explain = "";
+      if (obj.basic && obj.basic.explains) {
+        obj.basic.explains.forEach(function(item, index) {
+          explain += `<p>${item}</p>`
+        })
+      } else {
+        obj.translation.forEach(function(item, ind) {
+          explain += `<p>${item}</p>`
+        })
+      }
+      let html = `<h3>${obj.query}</h3>`;
+      html += `<div class="phonetic">美[${obj.basic["us-phonetic"]}] / 英[${obj.basic["uk-phonetic"]}]</div>`
+      html += `<p>词典释义</p>`
+      html += `<div class="explain">${explain}</div>`
+      return html;
+    }
+  </script>
 </body>
 
 </html>

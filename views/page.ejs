@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    等级英语
+  </title>
+  <% include commentCss %>
+</head>
+
+<body>
+  <div class='main'>
+    <article class="weui-article">
+      <h2 class="title"><%= title %></h2>
+      <div class="imgwrap"><img src="<%= img %> " /></div>
+      <div class="handleLevel">
+        <a class="btn-level active" href="javascript:;" id="level1">Level1</a>
+        <a class="btn-level" href="javascript:;" id="level2">Level2</a>
+        <a class="btn-level" href="javascript:;" id="level3">Level3</a>
+      </div>
+      <section class="handleContent">
+        <div class="content-level1">
+          <%- level1 %>
+        </div>
+        <div class="content-level2">
+          <%- level2 %>
+        </div>
+        <div class="content-level3">
+          <%- level3 %>
+        </div>
+      </section>
+  </div>
+  <div class="contentmenu_translate">
+    <a href="javascript:;" id="translate" class="weui-btn weui-btn_mini weui-btn_plain-primary">在线翻译</a>
+  </div>
+  <% include commentJs %>
+    <script>
+      // window.addEventListener('contextmenu', function(e) { // $(".contentmenu_translate").show(); // return false; // });
+
+      $(".btn-level").on("click", function() {
+        if ($(this).hasClass("active")) {
+          return
+        }
+        let id = $(this).attr("id");
+        $(this).siblings().removeClass("active");
+        $(this).addClass("active");
+        $(".handleContent").find("div").hide();
+        $(".content-" + id).show()
+      })
+    </script>
+</body>
+
+</html>

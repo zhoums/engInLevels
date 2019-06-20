@@ -2,23 +2,78 @@ body {
   background-color: #a3a3a3;
 }
 .main {
-  padding: 0.5em;
+  padding: 0.5rem;
   background: #a3a3a3;
 }
 .weui-article {
   background: #fff;
-  border-radius: 0.5em;
+  border-radius: 0.5rem;
 }
 .weui-article h2 {
   color: #0f658d;
 }
+.weui-article .imgwrap {
+  text-align: center;
+}
+.weui-article .handleLevel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0.5rem 0;
+}
+.weui-article .handleLevel .btn-level {
+  padding: 0.1em 1.5rem 0.08rem;
+  color: #034862;
+  font-size: 0.8rem;
+  border-radius: 0.2rem;
+  border: 1px solid #034862;
+  margin: 0 0.5rem;
+}
+.weui-article .handleLevel .btn-level.active {
+  background-color: #034862;
+  color: #fff;
+}
+.weui-article .content-level2,
+.weui-article .content-level3 {
+  display: none;
+}
+#con-translations {
+  text-align: left;
+}
+#con-translations > h3,
+#con-translations > p {
+  color: #000;
+}
+#con-translations .phonetic {
+  margin-bottom: 0.8rem;
+  font-size: 0.8rem;
+}
+#con-translations .explain {
+  padding-left: 1rem;
+  margin-top: 0.3rem;
+}
+#con-translations .explain p {
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+}
 .contentmenu_translate {
   position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   width: 100%;
-  height: 2em;
   top: 0;
   background-color: #fff;
   display: none;
-  -webkit-box-shadow: 0 0 1em #333;
-          box-shadow: 0 0 1em #333;
+  -webkit-box-shadow: 0 0 1rem #333;
+          box-shadow: 0 0 1rem #333;
+}
+.contentmenu_translate:after {
+  display: block;
+  content: " ";
+  font-size: 0;
+  clear: both;
 }

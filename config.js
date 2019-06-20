@@ -9,6 +9,11 @@ let conf={
     "token":"weixin",
     "prefix": "https://api.weixin.qq.com/cgi-bin/",
 		"mpPrefix": "https://mp.weixin.qq.com/cgi-bin/"
+  },
+  youdao:{
+    api:'https://openapi.youdao.com/api',
+    secreat:'W15MQo5mL5nZuO6ohlx60xtcgj2bdyU3',
+    appKey:'79ed69374fd90515',
   }
 }
 

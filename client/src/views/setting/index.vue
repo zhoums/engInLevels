@@ -51,6 +51,11 @@ export default {
             "type": "click",
             "name": "全部文章",
             "key": "V1002_ALL_NEWS"
+          },
+          {
+            "type": "click",
+            "name": "我的单词本",
+            "key": "V1003_MY_WORDS"
           }
         ]
       }
